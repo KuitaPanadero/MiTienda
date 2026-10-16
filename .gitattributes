@@ -1,0 +1,4 @@
+# Los scripts que corren en Linux (Railway) deben quedar con saltos de linea LF
+*.sh text eol=lf
+*.template text eol=lf
+Dockerfile text eol=lf

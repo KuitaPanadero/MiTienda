@@ -6,8 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 
+// En Railway la cadena llega por la variable ConnectionStrings__Default.
+// Los reintentos cubren el arranque de la base (puede tardar en estar lista).
 builder.Services.AddDbContext<AppDbContext>(opciones =>
-    opciones.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+    opciones.UseSqlServer(builder.Configuration.GetConnectionString("Default"),
+        sql => sql.EnableRetryOnFailure()));
 
 builder.Services.AddCors(opciones =>
 {
@@ -28,11 +31,10 @@ using (var scope = app.Services.CreateScope())
     db.Database.Migrate();
 }
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// Swagger activo tambien publicado, para probar la Api desde el navegador
+app.UseSwagger();
+app.UseSwaggerUI();
+app.MapGet("/", () => Results.Redirect("/swagger")).ExcludeFromDescription();
 
 app.UseHttpsRedirection();
 app.UseCors("Web");

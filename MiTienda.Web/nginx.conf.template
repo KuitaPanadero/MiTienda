@@ -1,0 +1,9 @@
+server {
+    listen ${PORT};
+    root /usr/share/nginx/html;
+
+    # Las rutas de Blazor (/clientes, etc.) las resuelve index.html
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}
