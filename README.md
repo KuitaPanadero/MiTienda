@@ -19,5 +19,8 @@ Cada proyecto es un servicio con su propio `Dockerfile`.
 
 | Servicio | Root Directory | Variable |
 |---|---|---|
+| SqlServer | `/MiTienda.Db` | `MSSQL_SA_PASSWORD` + volumen en `/var/opt/mssql` |
 | API | `/MiTienda.Api` | `ConnectionStrings__Default` = cadena de conexión de SQL Server |
 | Web | `/MiTienda.Web` | `API_URL` = dominio público de la API, terminado en `/` |
+
+SQL Server necesita 2 GB de RAM, por eso requiere el plan Hobby de Railway (el Trial da 1 GB por servicio).
