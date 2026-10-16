@@ -4,6 +4,8 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <!-- LocalDB solo existe en x64: en Windows ARM64 la Api debe correr como x64 para poder conectarse -->
+    <PlatformTarget Condition="'$(OS)' == 'Windows_NT'">x64</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
