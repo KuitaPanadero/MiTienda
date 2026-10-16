@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "MiTienda (Api + Web)",
+    "Projects": [
+      {
+        "Path": "MiTienda.Api\\MiTienda.Api.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      },
+      {
+        "Path": "MiTienda.Web\\MiTienda.Web.csproj",
+        "Action": "Start",
+        "DebugTarget": "https"
+      }
+    ]
+  }
+]

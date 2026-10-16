@@ -1,0 +1,335 @@
+:root {
+    --fondo: #fbf7f2;
+    --tinta: #1f3a2e;
+    --acento: #d9653b;
+    --acento-oscuro: #b8512c;
+    --gris: #6b6b6b;
+    --borde: #e8e1d8;
+    --blanco: #ffffff;
+}
+
+html, body {
+    font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+    background: var(--fondo);
+    color: var(--tinta);
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+}
+
+h1:focus {
+    outline: none;
+}
+
+a {
+    color: var(--acento);
+}
+
+/* Botón principal de la tienda */
+.btn-tienda {
+    background: var(--acento);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 0.55rem 1.3rem;
+    border-radius: 999px;
+}
+
+.btn-tienda:hover, .btn-tienda:focus {
+    background: var(--acento-oscuro);
+    color: #fff;
+}
+
+.form-control {
+    border-radius: 0.6rem;
+    border-color: var(--borde);
+}
+
+.form-control:focus {
+    border-color: var(--acento);
+    box-shadow: 0 0 0 0.2rem rgba(217, 101, 59, 0.2);
+}
+
+/* ---------- Inicio ---------- */
+.portada {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 2rem;
+    align-items: center;
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: 1.5rem;
+    padding: 3rem;
+}
+
+.portada h1 {
+    font-size: 2.6rem;
+    line-height: 1.15;
+    margin: 0.8rem 0 1rem;
+}
+
+.portada p {
+    color: var(--gris);
+    font-size: 1.05rem;
+    max-width: 30rem;
+    margin-bottom: 1.5rem;
+}
+
+.etiqueta {
+    display: inline-block;
+    background: rgba(217, 101, 59, 0.12);
+    color: var(--acento);
+    font-weight: 600;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+}
+
+.portada-caja {
+    display: grid;
+    place-items: center;
+    background: var(--tinta);
+    border-radius: 1.2rem;
+    aspect-ratio: 1 / 1;
+    max-width: 100%;
+}
+
+.bolsa {
+    font-size: 6rem;
+}
+
+.ventajas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.ventaja {
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: 1rem;
+    padding: 1.5rem;
+}
+
+.ventaja-icono {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.ventaja h3 {
+    font-size: 1.1rem;
+}
+
+.ventaja p {
+    color: var(--gris);
+    margin: 0;
+}
+
+/* ---------- Clientes ---------- */
+.titulo {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.titulo h1 {
+    margin: 0;
+}
+
+.sub {
+    color: var(--gris);
+    margin: 0;
+}
+
+.buscador {
+    max-width: 320px;
+}
+
+.clientes {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.panel {
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    position: sticky;
+    top: 5.5rem;
+}
+
+.panel h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.panel label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-top: 0.8rem;
+    margin-bottom: 0.25rem;
+}
+
+.acciones {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.2rem;
+}
+
+.tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.tarjeta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    background: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: 1rem;
+    padding: 1.2rem;
+    transition: border-color 0.15s, transform 0.15s;
+}
+
+.tarjeta:hover {
+    transform: translateY(-2px);
+}
+
+.tarjeta.activa {
+    border-color: var(--acento);
+}
+
+.avatar {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--tinta);
+    color: #fff;
+    font-weight: 600;
+}
+
+.datos {
+    display: flex;
+    flex-direction: column;
+}
+
+.datos span {
+    color: var(--gris);
+    font-size: 0.9rem;
+    word-break: break-all;
+}
+
+.botones {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.vacio {
+    color: var(--gris);
+    padding: 2rem;
+    text-align: center;
+    background: var(--blanco);
+    border: 1px dashed var(--borde);
+    border-radius: 1rem;
+}
+
+@media (max-width: 800px) {
+    .portada, .clientes, .ventajas {
+        grid-template-columns: 1fr;
+    }
+
+    .portada {
+        padding: 2rem 1.5rem;
+    }
+
+    .portada h1 {
+        font-size: 2rem;
+    }
+
+    .panel {
+        position: static;
+    }
+}
+
+/* ---------- Validación ---------- */
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid #e50000;
+}
+
+.validation-message {
+    color: #e50000;
+    font-size: 0.85rem;
+}
+
+/* ---------- Carga inicial ---------- */
+.cargando {
+    display: grid;
+    place-items: center;
+    gap: 1rem;
+    margin-top: 30vh;
+    color: var(--gris);
+}
+
+.cargando-icono {
+    display: grid;
+    place-items: center;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 1rem;
+    background: var(--acento);
+    color: #fff;
+    font-weight: 700;
+    animation: latido 1s ease-in-out infinite alternate;
+}
+
+@keyframes latido {
+    to {
+        transform: scale(1.1);
+    }
+}
+
+.blazor-error-boundary {
+    background: #b32121;
+    padding: 1rem;
+    color: white;
+}
+
+.blazor-error-boundary::after {
+    content: "Ocurrió un error.";
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}

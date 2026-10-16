@@ -1,0 +1,6 @@
+@Api = https://localhost:7101
+
+GET {{Api}}/api/clientes
+Accept: application/json
+
+###

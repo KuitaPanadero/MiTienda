@@ -1,0 +1,23 @@
+@inherits LayoutComponentBase
+
+<header class="barra">
+    <div class="barra-dentro">
+        <a class="marca" href="">
+            <span class="marca-icono">MT</span>
+            <span>MiTienda</span>
+        </a>
+
+        <nav class="menu">
+            <NavLink class="menu-link" href="" Match="NavLinkMatch.All">Inicio</NavLink>
+            <NavLink class="menu-link" href="clientes">Clientes</NavLink>
+        </nav>
+    </div>
+</header>
+
+<main class="contenido">
+    @Body
+</main>
+
+<footer class="pie">
+    MiTienda · Proyecto de clase · @DateTime.Now.Year
+</footer>

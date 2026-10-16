@@ -1,0 +1,136 @@
+@page "/clientes"
+@inject ClientesApi Api
+
+<PageTitle>Clientes · MiTienda</PageTitle>
+
+<div class="titulo">
+    <div>
+        <h1>Clientes</h1>
+        <p class="sub">@(lista?.Count ?? 0) registrados</p>
+    </div>
+    <input class="form-control buscador" placeholder="Buscar por nombre o correo..."
+           @bind="buscar" @bind:event="oninput" />
+</div>
+
+<div class="clientes">
+    <div class="panel">
+        <h2>@(actual.Id == 0 ? "Nuevo cliente" : "Editar cliente")</h2>
+
+        <EditForm Model="@actual" OnValidSubmit="Guardar">
+            <DataAnnotationsValidator />
+
+            <label>Nombre</label>
+            <InputText class="form-control" @bind-Value="actual.Nombre" />
+            <ValidationMessage For="() => actual.Nombre" />
+
+            <label>Correo</label>
+            <InputText class="form-control" @bind-Value="actual.Correo" />
+            <ValidationMessage For="() => actual.Correo" />
+
+            <label>Teléfono</label>
+            <InputText class="form-control" @bind-Value="actual.Telefono" />
+
+            <div class="acciones">
+                <button type="submit" class="btn btn-tienda">
+                    @(actual.Id == 0 ? "Agregar" : "Guardar")
+                </button>
+                @if (actual.Id != 0)
+                {
+                    <button type="button" class="btn btn-light" @onclick="Limpiar">Cancelar</button>
+                }
+            </div>
+        </EditForm>
+    </div>
+
+    <div>
+        @if (lista == null)
+        {
+            <p class="vacio">Cargando...</p>
+        }
+        else if (!Filtrados.Any())
+        {
+            <p class="vacio">No hay clientes para mostrar.</p>
+        }
+        else
+        {
+            <div class="tarjetas">
+                @foreach (var c in Filtrados)
+                {
+                    <div class="tarjeta @(c.Id == actual.Id ? "activa" : "")">
+                        <div class="avatar">@Iniciales(c.Nombre)</div>
+                        <div class="datos">
+                            <strong>@c.Nombre</strong>
+                            <span>@c.Correo</span>
+                            <span>@(string.IsNullOrWhiteSpace(c.Telefono) ? "Sin teléfono" : c.Telefono)</span>
+                        </div>
+                        <div class="botones">
+                            <button class="btn btn-sm btn-outline-dark" @onclick="() => Editar(c)">Editar</button>
+                            <button class="btn btn-sm btn-outline-danger" @onclick="() => Borrar(c.Id)">Borrar</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private List<Cliente>? lista;
+    private Cliente actual = new();
+    private string buscar = string.Empty;
+
+    private IEnumerable<Cliente> Filtrados =>
+        (lista ?? new()).Where(c =>
+            c.Nombre.Contains(buscar, StringComparison.OrdinalIgnoreCase) ||
+            c.Correo.Contains(buscar, StringComparison.OrdinalIgnoreCase));
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Cargar();
+    }
+
+    private async Task Cargar()
+    {
+        lista = await Api.Listar();
+    }
+
+    private async Task Guardar()
+    {
+        if (actual.Id == 0)
+            await Api.Crear(actual);
+        else
+            await Api.Editar(actual);
+
+        Limpiar();
+        await Cargar();
+    }
+
+    private void Editar(Cliente c)
+    {
+        actual = new Cliente
+        {
+            Id = c.Id,
+            Nombre = c.Nombre,
+            Correo = c.Correo,
+            Telefono = c.Telefono
+        };
+    }
+
+    private void Limpiar()
+    {
+        actual = new();
+    }
+
+    private async Task Borrar(int id)
+    {
+        await Api.Borrar(id);
+        if (actual.Id == id) Limpiar();
+        await Cargar();
+    }
+
+    private static string Iniciales(string nombre)
+    {
+        var partes = nombre.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        return string.Concat(partes.Take(2).Select(p => char.ToUpper(p[0])));
+    }
+}
